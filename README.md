@@ -14,7 +14,7 @@ You will also need the full path for your VPX, PUP, and Assets dierctory.  When 
 
 ## Parameters
 
-###These are more or less mandatory
+### These are more or less mandatory
 | Parameter | Description | Example
 | --- | --- | --- |
 | `-vpxLocation` | the location of your VPX directory | "C:\Pinball\Visual Pinball X" |
@@ -22,14 +22,14 @@ You will also need the full path for your VPX, PUP, and Assets dierctory.  When 
 | `-assetLocation` | the location of your assets directory | "D:\VPXAssets" |
 | `-tableName` | a regular expression for matching table names | ^Indiana |
 
-###Then pick a function
+### Then pick a function
 | Parameter | Description | 
 | --- | --- |
 | `-list` | Lists the tables that match the regular expression.  This is good for testing your search criteria |
 | ~~`-backup`~~  | ~~Pull assets from your `-assetLocation` directory into the appropriate VPX & PUP directories~~ |
 | `-restore` | Pushes assets from the various VPX & PUP directories into yout `-assetLocation` directory |
 
-###If using backup or restore, choose the specific assets you want.  
+### If using backup or restore, choose the specific assets you want.  
 | Parameter | Description | 
 | --- | --- |
 | `-copyAll` | Copy everything.  I am a leaf on the wind... |
@@ -40,7 +40,7 @@ You will also need the full path for your VPX, PUP, and Assets dierctory.  When 
 | `-copyNVRam` | Copy the NVRam file |
 | `-copyPUPPack` | Copy the PUPPack files - this is an unzip action and may take a while |
 
-###Aaaaand some optional-ish flags.  
+### Aaaaand some optional-ish flags.  
 | Parameter | Description | 
 | --- | --- |
 | `-tableAll` | If -copyTable is selected, this will copy all table files (VPX, VBS, POV, and B2S |
@@ -74,7 +74,7 @@ You will also need the full path for your VPX, PUP, and Assets dierctory.  When 
 
 ## Some notes about this script
 
-* There's about zero error checking.  Don't fuck up.  Consider your parameters wisely.  If you overwrite all your shit because you didn't read the directions or because my code sucks, that's on you.  Maybe run this a few times in a test directory to make sure it does what you intend.
+* There's about zero error checking.  Don't fuck up.  Consider your parameters wisely.  If you overwrite all your shit because you didn't read the directions or because my code sucks, that's on you.  *Maybe run this a few times in a test directory to make sure it does what you intend*.
 * Make sure your directories are enclosed in double quotes.  I have no idea what will happen if you pass paths with spaces and don't wrap them in quotes.
 * The asset format is meant to be compatible with ModRetro's filing strategy of folder names that match the table names, with the assets embedded within.  
 * -backup has not been implemented yet.
