@@ -53,19 +53,19 @@ You will also need the full path for your VPX, PUP, and Assets dierctory.  When 
 ## Examples
 
 *Which games do I have that contain the word "of"?*
-`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "of"
+`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "of"`
 
 *Which games do I have that start with the word "Star"?*
-`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "^Star"
+`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "^Star"`
 
 *How about just show me all of my tables, and show me which assets that have in a spreadsheet!  My Excel game is strong.*
-`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "." -gridView
+`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -list -tableName "." -gridView`
 
 *I want that sweet ass Indiana Jones VPX table.  That shit gots colors, sounds, pups, roms... all the things.. gimme*
-`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -vpxLocation "C:\Pinball\Visual Pinball X" -pupLocation "C:\Pinball\PinUPPlayer" -restore -copyAll -tableAll -tableName "^Indiana Jones"
+`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -vpxLocation "C:\Pinball\Visual Pinball X" -pupLocation "C:\Pinball\PinUPPlayer" -restore -copyAll -tableAll -tableName "^Indiana Jones"`
 
 *I just downloaded the new South Park, but all I want is the ROM and the VPX so that I don't overwite my POV and other files*
-`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -vpxLocation "C:\Pinball\Visual Pinball X" -pupLocation "C:\Pinball\PinUPPlayer" -restore -copyTable -tableVPX -copyROM -tableName "^South Park"
+`& .\VPXAssetLoader.ps1 -assetLocation "C:\VPXAssets" -vpxLocation "C:\Pinball\Visual Pinball X" -pupLocation "C:\Pinball\PinUPPlayer" -restore -copyTable -tableVPX -copyROM -tableName "^South Park"`
 
 ## Some notes about this script
 
