@@ -79,111 +79,113 @@ Function List-Tables {
 Function Restore-Tables {
 
     foreach($table in Get-Tables) {
-        Write-Output "`n`n`n$($table.TableName)"
-        Write-Output "---------------------------------------"
+        Write-Output "`n`n`n*******************************************************************"
+        Write-Output "$($table.TableName)"
+        Write-Output "*******************************************************************"
         if($vpxLocation -ne "") {
             if($copyTable -or $copyAll) {
                 Write-Output "`nTABLE FILES"
                 Write-Output "---------------------------------------"
                 #copy the backglass
-                if(($tableB2S -or $tableAll) -and $table.HasTables -and (Test-Path "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).directb2s")) {
+                if(($tableB2S -or $tableAll) -and $table.HasTables -and (Test-Path -Path "$($assetLocation)\$($table.TableName)\Tables\*.directb2s")) {
                     Write-Output "Copying $($assetLocation)\$($table.TableName)\Tables\$($table.TableName).directb2s to $vpxLocation\Tables"
-                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).directb2s" "$vpxLocation\Tables" -Force
+                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\*.directb2s" "$vpxLocation\Tables" -Force
                 } else {
                     Write-Output "$($table.TableName) NOT copying B2S"
+                    #//Write-Output "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).directb2s"
                 }
 
                 #copy the pov
-                if(($tablePOV -or $tableAll) -and $table.HasTables -and (Test-Path "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).pov")) {
+                if(($tablePOV -or $tableAll) -and $table.HasTables -and (Test-Path -Path "$($assetLocation)\$($table.TableName)\Tables\*.pov")) {
                     Write-Output "Copying $($assetLocation)\$($table.TableName)\Tables\$($table.TableName).pov to $vpxLocation\Tables"
-                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).pov" "$vpxLocation\Tables" -Force
+                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\*.pov" "$vpxLocation\Tables" -Force
                 } else {
                     Write-Output "$($table.TableName) NOT copying POV"
                 }
                 #copy the vbs
-                if(($tableVBS  -or $tableAll) -and $table.HasTables -and (Test-Path "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vbs")) {
+                if(($tableVBS  -or $tableAll) -and $table.HasTables -and (Test-Path -Path "$($assetLocation)\$($table.TableName)\Tables\*.vbs")) {
                     Write-Output "Copying $($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vbs to $vpxLocation\Tables"
-                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vbs" "$vpxLocation\Tables" -Force
+                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\*.vbs" "$vpxLocation\Tables" -Force
                 } else {
                     Write-Output "$($table.TableName) NOT copying VBS"
                 }
                 #copy the vpx
-                if(($tableVPX -or $tableAll) -and $table.HasTables -and (Test-Path "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vpx")) {
+                if(($tableVPX -or $tableAll) -and $table.HasTables -and (Test-Path -Path "$($assetLocation)\$($table.TableName)\Tables\*.vpx")) {
                     Write-Output "Copying $($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vpx to $vpxLocation\Tables"
-                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\$($table.TableName).vpx" "$vpxLocation\Tables" -Force
+                    Copy-Item "$($assetLocation)\$($table.TableName)\Tables\*.vpx" "$vpxLocation\Tables" -Force
                 } else {
                     Write-Output "$($table.TableName) NOT copying VPX"
                 }
             }
         }
-    }
-    if($copyRom -or $copyAll) {
-        Write-Output "`nROMS"
-        Write-Output "---------------------------------------"
+        if($copyRom -or $copyAll) {
+            Write-Output "`nROMS"
+            Write-Output "---------------------------------------"
 
-        if($vpxLocation -ne "") {
-            if($table.HasRoms) {
-                Write-Output "Copying $($assetLocation)\$($table.TableName)\Roms\*.zip to $vpxLocation\VPinMAME\roms"
-                Copy-Item "$($assetLocation)\$($table.TableName)\Roms\*.zip" "$vpxLocation\VPinMAME\roms" -Force
-            } else {
-                Write-Output "$($table.TableName) NOT copying Roms"
+            if($vpxLocation -ne "") {
+                if($table.HasRoms) {
+                    Write-Output "Copying $($assetLocation)\$($table.TableName)\Roms\*.zip to $vpxLocation\VPinMAME\roms"
+                    Copy-Item "$($assetLocation)\$($table.TableName)\Roms\*.zip" "$vpxLocation\VPinMAME\roms" -Force
+                } else {
+                    Write-Output "$($table.TableName) NOT copying Roms"
+                }
             }
         }
-    }
-    if($copyAltSound -or $copyAll) {
-        Write-Output "`nALTSOUND"
-        Write-Output "---------------------------------------"
+        if($copyAltSound -or $copyAll) {
+            Write-Output "`nALTSOUND"
+            Write-Output "---------------------------------------"
         
-        if($vpxLocation -ne "") {
-            if($table.HasAltSound) {
-                mkdir -Force "$vpxLocation\VPinMAME\altsound" | Out-Null
-                foreach($f in (gci "$($assetLocation)\$($table.TableName)\altsound")) {
-                    if($f.Name.EndsWith("zip")) {
-                        Write-Output "Copying $($assetLocation)\$($table.TableName)\altsound\$($f.Name) to $vpxLocation\VPinMAME\altsound"
-                        Expand-Archive -Path $f.PSPath -DestinationPath "$vpxLocation\VPinMAME\altsound" -Force | Out-Null
+            if($vpxLocation -ne "") {
+                if($table.HasAltSound) {
+                    mkdir -Force "$vpxLocation\VPinMAME\altsound" | Out-Null
+                    foreach($f in (gci "$($assetLocation)\$($table.TableName)\altsound")) {
+                        if($f.Name.EndsWith("zip")) {
+                            Write-Output "Copying $($assetLocation)\$($table.TableName)\altsound\$($f.Name) to $vpxLocation\VPinMAME\altsound"
+                            Expand-Archive -Path $f.PSPath -DestinationPath "$vpxLocation\VPinMAME\altsound" -Force | Out-Null
+                        }
+                    }
+                }
+            }
+        }    
+        if($copyAltColor -or $copyAll) {
+            Write-Output "`nALTCOLOR"
+            Write-Output "---------------------------------------"
+            if($vpxLocation -ne "") {
+                if($table.HasAltColor) {
+                    mkdir -Force "$vpxLocation\VPinMAME\altcolor" | Out-Null
+                    foreach($f in (gci "$($assetLocation)\$($table.TableName)\altcolor")) {
+                        Write-Output "Copying $($assetLocation)\$($table.TableName)\altcolor\$($f.Name) to $vpxLocation\VPinMAME\altcolor"
+                        cp -Recurse -Force $f.PSPath "$vpxLocation\VPinMAME\altcolor"
                     }
                 }
             }
         }
-    }    
-    if($copyAltColor -or $copyAll) {
-        Write-Output "`nALTCOLOR"
-        Write-Output "---------------------------------------"
-        if($vpxLocation -ne "") {
-            if($table.HasAltColor) {
-                mkdir -Force "$vpxLocation\VPinMAME\altcolor" | Out-Null
-                foreach($f in (gci "$($assetLocation)\$($table.TableName)\altcolor")) {
-                    Write-Output "Copying $($assetLocation)\$($table.TableName)\altcolor\$($f.Name) to $vpxLocation\VPinMAME\altcolor"
-                    cp -Recurse -Force $f.PSPath "$vpxLocation\VPinMAME\altcolor"
-                }
-            }
-        }
-    }
-    if($copyNVRam -or $copyAll) {
-        Write-Output "`nNVRAM"
-        Write-Output "---------------------------------------"
+        if($copyNVRam -or $copyAll) {
+            Write-Output "`nNVRAM"
+            Write-Output "---------------------------------------"
         
-        if($vpxLocation -ne "") {
-            if($table.HasNVRam) {
-                mkdir -Force "$vpxLocation\VPinMAME\nvram" | Out-Null
-                foreach($f in (gci "$($assetLocation)\$($table.TableName)\nvram")) {
-                    Write-Output "Copying $($assetLocation)\$($table.TableName)\nvram\$($f.Name) to $vpxLocation\VPinMAME\nvram"
-                    cp -Force $f.PSPath "$vpxLocation\VPinMAME\nvram"
+            if($vpxLocation -ne "") {
+                if($table.HasNVRam) {
+                    mkdir -Force "$vpxLocation\VPinMAME\nvram" | Out-Null
+                    foreach($f in (gci "$($assetLocation)\$($table.TableName)\nvram")) {
+                        Write-Output "Copying $($assetLocation)\$($table.TableName)\nvram\$($f.Name) to $vpxLocation\VPinMAME\nvram"
+                        cp -Force $f.PSPath "$vpxLocation\VPinMAME\nvram"
+                    }
                 }
             }
         }
-    }
 
-    if($copyPUPPack -or $copyAll) {
-        Write-Output "`nPUPPACK"
-        Write-Output "---------------------------------------"
+        if($copyPUPPack -or $copyAll) {
+            Write-Output "`nPUPPACK"
+            Write-Output "---------------------------------------"
 
-        if($pupLocation -ne "") {
-            if($table.HasPUPPack) {
-                foreach($f in (gci "$($assetLocation)\$($table.TableName)\PupPack")) {
-                    if($f.Name.EndsWith("zip")) {
-                        Write-Output "Copying $($assetLocation)\$($table.TableName)\PupPack\$($f.Name) to $pupLocation\PUPVideos"
-                        Expand-Archive -Path $f.PSPath -DestinationPath "$pupLocation\PUPVideos" -Force | Out-Null
+            if($pupLocation -ne "") {
+                if($table.HasPUPPack) {
+                    foreach($f in (gci "$($assetLocation)\$($table.TableName)\PupPack")) {
+                        if($f.Name.EndsWith("zip")) {
+                            Write-Output "Copying $($assetLocation)\$($table.TableName)\PupPack\$($f.Name) to $pupLocation\PUPVideos"
+                            Expand-Archive -Path $f.PSPath -DestinationPath "$pupLocation\PUPVideos" -Force | Out-Null
+                        }
                     }
                 }
             }
